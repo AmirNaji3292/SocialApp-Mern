@@ -1,0 +1,38 @@
+@font-face {
+  font-family: 'IRANSansWeb';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./assets/fonts/IRANSansWeb(FaNum).eot'),
+     url('./assets/fonts/IRANSansWeb(FaNum).woff2') format('woff2'), 
+     url('./assets/fonts/IRANSansWeb(FaNum).woff') format('woff'), 
+     url('./assets/fonts/IRANSansWeb(FaNum).ttf') format('truetype');
+}
+
+*{
+  font-family: 'IRANSansWeb';
+}
+button,input{
+  font-family: 'IRANSansWeb';
+}
+
+body{
+  direction: rtl;
+  text-align: right;
+}
+
+#root{
+  background-color: hsl(0,0%,4%);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding-bottom: 50px;
+}
+
+.wrapper{
+  min-height: 100vh;
+}
+
+.container{
+  padding: 0 20px;
+}

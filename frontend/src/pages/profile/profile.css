@@ -1,0 +1,37 @@
+.profile{
+     position: relative;
+}
+
+.profile img{
+     border-radius: 50%;
+     -webkit-border-radius: 50%;
+     -moz-border-radius: 50%;
+     -ms-border-radius: 50%;
+     -o-border-radius: 50%;
+     object-fit: cover;
+}
+.upload-profile{
+     position: absolute;
+     left: -10px;
+     bottom: -10px;
+     background: none;
+     border: 2px solid rgb(110, 110, 110);
+     border-radius: 50%;
+     -webkit-border-radius: 50%;
+     -moz-border-radius: 50%;
+     -ms-border-radius: 50%;
+     -o-border-radius: 50%;
+     cursor: pointer;
+}
+
+.upload-profile svg{
+     font-size: 20px;
+}
+
+.avatar img{
+     border-radius: 25px;
+     -webkit-border-radius: 25px;
+     -moz-border-radius: 25px;
+     -ms-border-radius: 25px;
+     -o-border-radius: 25px;
+}

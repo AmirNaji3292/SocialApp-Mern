@@ -14,8 +14,11 @@ const app=express()
 dbConnect()
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors({credentials:true, origin:'http://localhost:3000'}))
-
+// app.use(cors({credentials:true, origin:'http://localhost:3000'}))
+app.use(cors({
+  origin: process.env.CLIENT_URL,
+  credentials: true,
+}))
 app.use(userRoute)
 app.use(catRoute)
 app.use(postRoute)

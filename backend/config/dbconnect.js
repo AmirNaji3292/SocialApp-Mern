@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 
+
 // const connection = {};
 
 // export const connectToDb = async () => {
@@ -20,8 +21,8 @@ import mongoose from "mongoose"
  const dbConnect=async()=>{
   try {
      await mongoose.connect(process.env.MONGO,{
-      useNewUrlParser:true,
-      useUnifiedTopology:true
+      // useNewUrlParser: true,
+      // useUnifiedTopology: true,
      })
      console.log("connect to db ...")
   } catch (error) {
