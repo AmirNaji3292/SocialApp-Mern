@@ -41,7 +41,10 @@ export const AuthContextProvider=({children})=>{
  
     const refreshToken=async()=>{
         try {
-            const response=await axios.get(`${baseUrl}/api/token`)
+            const response=await axios.get(`${baseUrl}/api/token`, {
+             withCredentials: true,})
+
+
              setToken(response.data.accessToken)
           const decode= jwtDecode(response.data.accessToken)
           setUserId(decode.userId)
@@ -57,26 +60,51 @@ export const AuthContextProvider=({children})=>{
     }
 
 
+const axiosJwt = axios.create({
+  withCredentials: true,
+});
 
+axiosJwt.interceptors.request.use(async (config) => {
+  const currentDate = new Date();
 
-    const axiosJwt=axios.create()
-    axiosJwt.interceptors.request.use(async(config)=>{
-        const currentDate=new Date()
-        if(expire * 1000 < currentDate.getTime()){
-            const response=await axios.get(`${baseUrl}/api/token`)
-            config.headers.Authorization=`Bearer ${response.data.accessToken}`
-            setToken(response.data.accessToken)
-            const decode= jwtDecode(response.data.accessToken)
-            setUserId(decode.userId)
-            setExpire(decode.exp)
-          setProfilePhoto(decode.profilePhoto)
-          setChef(decode.isAdmin)
+  if (expire * 1000 < currentDate.getTime()) {
+    const response = await axios.get(`${baseUrl}/api/token`, {
+      withCredentials: true,
+    });
+
+    config.headers.Authorization = `Bearer ${response.data.accessToken}`;
+
+    setToken(response.data.accessToken);
+
+    const decode = jwtDecode(response.data.accessToken);
+
+    setUserId(decode.userId);
+    setExpire(decode.exp);
+    setProfilePhoto(decode.profilePhoto);
+    setChef(decode.isAdmin);
+  }
+
+  return config;
+});
+
+    // const axiosJwt=axios.create()
+    // axiosJwt.interceptors.request.use(async(config)=>{
+    //     const currentDate=new Date()
+    //     if(expire * 1000 < currentDate.getTime()){
+    //         const response=await axios.get(`${baseUrl}/api/token`)
+    //         config.headers.Authorization=`Bearer ${response.data.accessToken}`
+    //         setToken(response.data.accessToken)
+    //         const decode= jwtDecode(response.data.accessToken)
+    //         setUserId(decode.userId)
+    //         setExpire(decode.exp)
+    //       setProfilePhoto(decode.profilePhoto)
+    //       setChef(decode.isAdmin)
 
   
-        }return config;
-    },(err)=>{
-        return Promise.reject.error
-    })
+    //     }return config;
+    // },(err)=>{
+    //     return Promise.reject.error
+    // })
     
 // Get all users 
   const getUser=async()=>{
@@ -99,7 +127,8 @@ export const AuthContextProvider=({children})=>{
 
 const register=async(data)=>{
     try {
-       const result=await axios.post(`${baseUrl}/api/users/register`,data)
+
+       const result=await axios.post(`${baseUrl}/api/users/register`,data,{withCredentials:true})
       
        toast(result.data, {
            position: "bottom-right",
@@ -123,7 +152,10 @@ const register=async(data)=>{
 
 const login=async(data)=>{
     try {
-       const res=await axios.post(`${baseUrl}/api/users/login`,data)
+       const res=await axios.post(`${baseUrl}/api/users/login`,data, {
+         withCredentials: true,})
+
+  
         setUserId(res.data.userId)
         setProfilePhoto(res.data.profilePhoto)
         setChef(res.data.isAdmin)
