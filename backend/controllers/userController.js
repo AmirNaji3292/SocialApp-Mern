@@ -67,10 +67,16 @@ export const userLogin=asyncHandler(async(req,res)=>{
       
        await User.findByIdAndUpdate(userId,{refresh_token:refreshToken})
 
-       res.cookie('refreshToken',refreshToken,{
-        httpOnly:true,
-        maxAge:24*60*60*1000
-       })
+    //    res.cookie('refreshToken',refreshToken,{
+    //     httpOnly:true,
+    //     maxAge:24*60*60*1000
+    //    })
+        res.cookie("refreshToken", refreshToken, {
+       httpOnly: true,
+         secure: true,
+         sameSite: "none",
+           maxAge: 24 * 60 * 60 * 1000,
+          });
     
        res.json({isAdmin,accessToken,userId,firstName,email,lastName,profilePhoto,isAccountVerified})
 
